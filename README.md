@@ -1,7 +1,3 @@
-1ª atividae DSN
+#1ª node
 
-D -> Desenvolvimento
-S -> Sistemas 
-N -> Nicolas 
-
-Ou seja primeira atividade do Prof: Nicolas
+npm i nodemon para instalar node
