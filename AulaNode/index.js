@@ -8,33 +8,33 @@ app.use(express.json());
 
 app.get('/visualizar', (req, res) => {
     res.send(list);
-}) // Responde com a lista de usuários
+}); // responsável pela resposta
 
 app.post('/cadastrar', (req, res) => {
     const { nome, idade } = req.body;
-    const id = list.length;
-    list.push({ id, nome, idade });
-    res.send(`Usuário cadastrado: Nome: ${nome}, Idade: ${idade}`);
-}) //cadastra um usuario
-
-app.put('/update/:id', (req, res) => {
-    const { id } = req.params;
-    const { nome, idade } = req.body;
-    try{
-        personList[id - 1] = {id, nome, idade};
-        res.send(`Usuario atualizado!\n\nID: ${id}\nNovo nome: ${nome} \nNova idade ${idade}`)
-    } catch(err) {
-        res.send("Usuario não atualizado");
-    }
+    const id = list.length 
+    list.push({ nome, idade, id });
+    res.send(`Usuário cadastrado: nome = ${nome}, idade = ${idade}`);
 });
 
 app.delete('/deletar/:id', (req, res) => {
-    const { id } = req.params; 
-    const index = parseInt(id,10);
+    const { id } = req.params;
+    const index = parseInt(id, 10);
     list.splice(index, 1);
-    res.send(`Usuario deletado. Lista atual: ${JSON.stringify(list)}`);
-}) 
+    res.send(`Usuário deletado. Lista atual: ${JSON.stringify(list)}`);
+});
+
+app.put('/up/:id', (req, res) => {
+   const {id} = req.params
+   const {nome,idade} = req.body
+   try{
+    list[id] = {nome, idade}
+    res.send(`Usuario atualizido nome = ${nome} idade = ${idade} id = ${id}`)
+   }catch(err){
+    res.send(`Usuario não atualizido ${nome}${idade}${id}`)
+   }
+});
 
 app.listen(port, () => {
-    console.log(`entrada ${port}`);
-}) // Inicia o servido
+    console.log(`Exemplo na porta ${port}`);
+}); // inicia o servidor
