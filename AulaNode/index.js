@@ -21,7 +21,7 @@ app.put('/update/:id', (req, res) => {
     const { id } = req.params;
     const { nome, idade } = req.body;
     try{
-        list[id - 1] = {id, nome, idade};
+        personList[id - 1] = {id, nome, idade};
         res.send(`Usuario atualizado!\n\nID: ${id}\nNovo nome: ${nome} \nNova idade ${idade}`)
     } catch(err) {
         res.send("Usuario não atualizado");
@@ -30,13 +30,9 @@ app.put('/update/:id', (req, res) => {
 
 app.delete('/deletar/:id', (req, res) => {
     const { id } = req.params; 
-    if (list[id - 1]) {
-        list.slice(id - 1, 1);
-        res.send('usuario deletado')
-    } else {
-        res.status(408).send('usuario não encontrado');
-    }
-
+    const index = parseInt(id,10);
+    list.splice(index, 1);
+    res.send(`Usuario deletado. Lista atual: ${JSON.stringify(list)}`);
 }) 
 
 app.listen(port, () => {
